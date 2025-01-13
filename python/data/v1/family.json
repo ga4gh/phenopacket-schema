@@ -1,0 +1,268 @@
+{
+  "id": "comprehensive-family-id",
+  "proband": {
+    "id": "comprehensive-phenopacket-id",
+    "subject": {
+      "id": "14 year-old boy",
+      "alternateIds": ["boy", "patient", "proband"],
+      "dateOfBirth": "1970-01-02T10:17:36.000000100Z",
+      "ageAtCollection": {
+        "age": "P14Y"
+      },
+      "sex": "MALE",
+      "karyotypicSex": "XY",
+      "taxonomy": {
+        "id": "NCBITaxon:9606",
+        "label": "homo sapiens"
+      }
+    },
+    "phenotypicFeatures": [{
+      "type": {
+        "id": "HP:0001558",
+        "label": "Decreased fetal movement"
+      },
+      "classOfOnset": {
+        "id": "HP:0011461",
+        "label": "Fetal onset"
+      },
+      "evidence": [{
+        "evidenceCode": {
+          "id": "ECO:0000033",
+          "label": "author statement supported by traceable reference"
+        },
+        "reference": {
+          "id": "PMID:30808312",
+          "description": "COL6A1 mutation leading to Bethlem myopathy with recurrent hematuria: a case report."
+        }
+      }]
+    }, {
+      "type": {
+        "id": "HP:0031910",
+        "label": "Abnormal cranial nerve physiology"
+      },
+      "negated": true,
+      "evidence": [{
+        "evidenceCode": {
+          "id": "ECO:0000033",
+          "label": "author statement supported by traceable reference"
+        },
+        "reference": {
+          "id": "PMID:30808312",
+          "description": "COL6A1 mutation leading to Bethlem myopathy with recurrent hematuria: a case report."
+        }
+      }]
+    }, {
+      "type": {
+        "id": "HP:0011463",
+        "label": "Macroscopic hematuria"
+      },
+      "modifiers": [{
+        "id": "HP:0031796",
+        "label": "Recurrent"
+      }],
+      "ageOfOnset": {
+        "age": "P14Y"
+      },
+      "evidence": [{
+        "evidenceCode": {
+          "id": "ECO:0000033",
+          "label": "author statement supported by traceable reference"
+        },
+        "reference": {
+          "id": "PMID:30808312",
+          "description": "COL6A1 mutation leading to Bethlem myopathy with recurrent hematuria: a case report."
+        }
+      }]
+    }, {
+      "type": {
+        "id": "HP:0001270",
+        "label": "Motor delay"
+      },
+      "severity": {
+        "id": "HP:0012825",
+        "label": "Mild"
+      },
+      "classOfOnset": {
+        "id": "HP:0011463",
+        "label": "Childhood onset"
+      }
+    }],
+    "biosamples": [{
+      "id": "biosample-id",
+      "individualId": "14 year-old boy",
+      "description": "Muscle biopsy of 14 year-old boy",
+      "sampledTissue": {
+        "id": "UBERON:0003403",
+        "label": "skin of forearm"
+      },
+      "taxonomy": {
+        "id": "NCBITaxon:9606",
+        "label": "homo sapiens"
+      },
+      "ageOfIndividualAtCollection": {
+        "age": "P14Y"
+      },
+      "histologicalDiagnosis": {
+        "id": "NCIT:C38757",
+        "label": "Negative Finding"
+      },
+      "tumorProgression": {
+        "id": "NCIT:C3677",
+        "label": "Benign Neoplasm"
+      },
+      "tumorGrade": {
+        "id": "NCIT:C28076",
+        "label": "Disease Grade Qualifier"
+      },
+      "diagnosticMarkers": [{
+        "id": "NCIT:C68748",
+        "label": "HER2/Neu Positive"
+      }]
+    }],
+    "genes": [{
+      "id": "HGNC1:3688",
+      "symbol": "FGFR1"
+    }],
+    "variants": [{
+      "hgvsAllele": {
+        "hgvs": "NM_001848.2:c.877G\u003eA"
+      },
+      "zygosity": {
+        "id": "GENO:0000135",
+        "label": "heterozygous"
+      }
+    }],
+    "diseases": [{
+      "term": {
+        "id": "OMIM:101600",
+        "label": "PFEIFFER SYNDROME"
+      },
+      "classOfOnset": {
+        "id": "HP:0003577",
+        "label": "Congenital onset"
+      }
+    }],
+    "htsFiles": [{
+      "uri": "file://data/genomes/P000001C",
+      "description": "Whole genome sequencing VCF output",
+      "htsFormat": "VCF",
+      "genomeAssembly": "GRCh38.p13",
+      "individualToSampleIdentifiers": {
+        "14 year-old boy": "P000001C"
+      }
+    }],
+    "metaData": {
+      "created": "2022-10-03T16:39:04.000123456Z",
+      "createdBy": "Peter R.",
+      "submittedBy": "PhenopacketLab",
+      "resources": [{
+        "id": "hp",
+        "name": "human phenotype ontology",
+        "url": "http://purl.obolibrary.org/obo/hp.owl",
+        "version": "2018-03-08",
+        "namespacePrefix": "HP",
+        "iriPrefix": "http://purl.obolibrary.org/obo/HP_"
+      }, {
+        "id": "geno",
+        "name": "Genotype Ontology",
+        "url": "http://purl.obolibrary.org/obo/geno.owl",
+        "version": "19-03-2018",
+        "namespacePrefix": "GENO",
+        "iriPrefix": "http://purl.obolibrary.org/obo/GENO_"
+      }, {
+        "id": "pubmed",
+        "name": "PubMed",
+        "namespacePrefix": "PMID",
+        "iriPrefix": "https://www.ncbi.nlm.nih.gov/pubmed/"
+      }, {
+        "id": "ncit",
+        "name": "NCI Thesaurus",
+        "url": "http://purl.obolibrary.org/obo/ncit.owl",
+        "version": "20-03-2020",
+        "namespacePrefix": "NCIT",
+        "iriPrefix": "http://purl.obolibrary.org/obo/NCIT_"
+      }],
+      "phenopacketSchemaVersion": "1.0.0",
+      "externalReferences": [{
+        "id": "PMID:30808312",
+        "description": "COL6A1 mutation leading to Bethlem myopathy with recurrent hematuria: a case report."
+      }]
+    }
+  },
+  "relatives": [{
+    "subject": {
+      "id": "MOTHER",
+      "sex": "FEMALE"
+    }
+  }, {
+    "subject": {
+      "id": "FATHER",
+      "sex": "MALE"
+    }
+  }],
+  "pedigree": {
+    "persons": [{
+      "individualId": "14 year-old boy",
+      "paternalId": "FATHER",
+      "maternalId": "MOTHER",
+      "sex": "MALE",
+      "affectedStatus": "AFFECTED"
+    }, {
+      "individualId": "MOTHER",
+      "sex": "FEMALE",
+      "affectedStatus": "UNAFFECTED"
+    }, {
+      "individualId": "FATHER",
+      "sex": "MALE",
+      "affectedStatus": "UNAFFECTED"
+    }]
+  },
+  "htsFiles": [{
+    "uri": "file://data/genomes/FAM000001",
+    "description": "Whole genome sequencing VCF output",
+    "htsFormat": "VCF",
+    "genomeAssembly": "GRCh38.p13",
+    "individualToSampleIdentifiers": {
+      "14 year-old boy": "P000001C",
+      "MOTHER": "P000001M",
+      "FATHER": "P000001F"
+    }
+  }],
+  "metaData": {
+    "created": "2022-10-03T16:39:04.000123456Z",
+    "createdBy": "Peter R.",
+    "submittedBy": "PhenopacketLab",
+    "resources": [{
+      "id": "hp",
+      "name": "human phenotype ontology",
+      "url": "http://purl.obolibrary.org/obo/hp.owl",
+      "version": "2018-03-08",
+      "namespacePrefix": "HP",
+      "iriPrefix": "http://purl.obolibrary.org/obo/HP_"
+    }, {
+      "id": "geno",
+      "name": "Genotype Ontology",
+      "url": "http://purl.obolibrary.org/obo/geno.owl",
+      "version": "19-03-2018",
+      "namespacePrefix": "GENO",
+      "iriPrefix": "http://purl.obolibrary.org/obo/GENO_"
+    }, {
+      "id": "pubmed",
+      "name": "PubMed",
+      "namespacePrefix": "PMID",
+      "iriPrefix": "https://www.ncbi.nlm.nih.gov/pubmed/"
+    }, {
+      "id": "ncit",
+      "name": "NCI Thesaurus",
+      "url": "http://purl.obolibrary.org/obo/ncit.owl",
+      "version": "20-03-2020",
+      "namespacePrefix": "NCIT",
+      "iriPrefix": "http://purl.obolibrary.org/obo/NCIT_"
+    }],
+    "phenopacketSchemaVersion": "1.0.0",
+    "externalReferences": [{
+      "id": "PMID:30808312",
+      "description": "COL6A1 mutation leading to Bethlem myopathy with recurrent hematuria: a case report."
+    }]
+  }
+}
