@@ -33,7 +33,7 @@ keywords = [
 ]
 
 dependencies = [
-    "protobuf>=3.20.2,<=5.29.3",  # Last tested Python version
+    "protobuf>=3.20.2,<7.0.0",  # Last tested Python version
 ]
 
 [project.optional-dependencies]
