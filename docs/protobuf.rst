@@ -62,9 +62,9 @@ it is not possible to define a field as required.
     syntax = "proto3";
     
     message dog {
-      required string name = 1;
+      string name = 1;
       int32 weight = 2;
-      repeated string toys = 4;
+      repeated string toys = 3;
       }
 
 We can compile this code with the following command

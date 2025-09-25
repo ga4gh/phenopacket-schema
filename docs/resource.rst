@@ -37,7 +37,7 @@ For an ontology, the url SHALL point to the obo or owl file, e.g. This informati
   resource:
     id: "hp"
     name: "Human Phenotype Ontology"
-    url: "http://www.human-phenotype-ontology.org"
+    url: "http://purl.obolibrary.org/obo/hp.owl"
     version: "2018-03-08"
     namespacePrefix: "HP"
     iriPrefix: "http://purl.obolibrary.org/obo/HP_"
