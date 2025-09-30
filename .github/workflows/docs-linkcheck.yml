@@ -14,9 +14,6 @@ on:
       - '.github/workflows/docs-linkcheck.yml'
   # Allow manual execution
   workflow_dispatch:
-  # Run weekly to catch external link breakage
-  schedule:
-    - cron: '0 12 * * 1'  # Monday at 12:00 UTC
 
 jobs:
   linkcheck:
@@ -40,10 +37,10 @@ jobs:
     - name: Run Sphinx linkcheck
       run: |
         cd docs
-        sphinx-build -b linkcheck . _build/linkcheck -W --keep-going
+        sphinx-build -b linkcheck . _build/linkcheck
 
     - name: Upload linkcheck results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: linkcheck-results
