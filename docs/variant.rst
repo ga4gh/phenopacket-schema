@@ -23,7 +23,7 @@ A variation can refer to an external source, for example the ClinGen allele regi
 using the ``id`` field. It is RECOMMENDED to use a :ref:`rstcurie` identifier and corresponding :ref:`rstresource`.
 When indicating multiple alternate ids for a variation, use the ``alternate_ids`` field.
 
-Multiple alleles *in-cis* can be modeled as a VRS `Haplotype <https://https://vrs.ga4gh.org/en/latest/terms_and_model.html#haplotype>`_.
+Multiple alleles *in-cis* can be modeled as a VRS `Haplotype <https://vrs.ga4gh.org/en/latest/terms_and_model.html#haplotype>`_.
 
 The zygosity of the variant as determined in all of the samples represented in this Phenopacket is represented
 using a list of terms taken from the `Genotype Ontology (GENO) <https://www.ebi.ac.uk/ols/ontologies/geno>`_.

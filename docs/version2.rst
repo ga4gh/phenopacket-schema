@@ -12,8 +12,7 @@ Clin/Pheno Full WS & Phenopackets Subgroups. Newcomers are welcome, please conta
 the `GA4GH <https://www.ga4gh.org/contactus/>`_ to get involved!
 
 A number of new elements are now open for discussion by the community in the
-`v1.1 branch <https://github.com/phenopackets/phenopacket-schema/tree/v1.1>`_ of
-the phenopackets GitHub repository.
+main repository at https://github.com/ga4gh/phenopacket-schema.
 
 
 Version 2.0

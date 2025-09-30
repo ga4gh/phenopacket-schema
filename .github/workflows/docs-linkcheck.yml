@@ -1,0 +1,47 @@
+# This workflow checks for broken links in the documentation
+name: Documentation Link Check
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs-linkcheck.yml'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs-linkcheck.yml'
+  # Allow manual execution
+  workflow_dispatch:
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install documentation dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r docs/requirements.txt
+
+    - name: Run Sphinx linkcheck
+      run: |
+        cd docs
+        sphinx-build -b linkcheck . _build/linkcheck
+
+    - name: Upload linkcheck results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: linkcheck-results
+        path: docs/_build/linkcheck/
