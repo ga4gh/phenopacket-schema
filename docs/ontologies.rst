@@ -16,7 +16,7 @@ in this recent `review <https://www.ncbi.nlm.nih.gov/pubmed/30304648>`_.
 
 While both terminologies and ontologies can be used, the phenopacket schema recommends the use of specific ontologies in order to maximize utility of performing algorithmic analysis over medically relevant abnormalities.
 
-The `Human Phenotype Ontology (HPO) <http://www.human-phenotype-ontology.org>`_  describes patient phenotypic features and was originally designed for genomic diagnostics, translational research, genomic matchmaking, and systems biology applications in the field of rare disease and other fields of medicine. It is increasinly used within clinical applications today for precision medicine.
+The `Human Phenotype Ontology (HPO) <http://www.human-phenotype-ontology.org>`_  describes patient phenotypic features and was originally designed for genomic diagnostics, translational research, genomic matchmaking, and systems biology applications in the field of rare disease and other fields of medicine. It is increasingly used within clinical applications today for precision medicine.
 
 The HPO is developed in the context of the `Monarch Initiative <https://monarchinitiative.org/>`_, an international team of
 computer scientists, clinicians, and biologists in the United States, Europe, and Australia;

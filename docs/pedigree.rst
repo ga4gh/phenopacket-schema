@@ -139,8 +139,8 @@ This element is an enumeration to
 In a PED file, affected persons are encoded with "2", and unaffecteds by "1"
 (a "0" is used if no information is available). Instead, Phenopackets uses an enumeration as shown in the table.
 
-In a PED file, the sex of individuals is encoded as a "1" for females, "2" for males, and "0" for unknown. Phenopackets
-uses :ref:`rstsex` instead.
+In a PED file, the sex of individuals is encoded as a "2" for females, "1" for males, and "0" for unknown. Phenopackets
+uses :ref:`rstsex` instead (Note that the enumeration used for Sex by the Phenopacket Schema has 1 for FEMALE and 2 for MALE, but this is internal and is not visible in the JSON-serialized Phenopacket).
 
 The message is made up of a list of ``Person`` elements (the Person element is defined within the Pedigree element).
 Each Person element is equivalent to one row of a PED file.

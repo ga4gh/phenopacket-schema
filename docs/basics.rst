@@ -38,3 +38,8 @@ component of a disease, such as `Marfan syndrome <https://hpo.jax.org/app/browse
 Phenopacket proposed here is designed to support `deep phenotyping <https://www.ncbi.nlm.nih.gov/pubmed/22504886>`_, a
 process wherein individual components of each phenotype are observed and documented. The phenotypes may be
 constitutional or those related to a sample (such as from a biopsy).
+
+The Phenopacket Schema was developed under the aegis of the `GA4GH <https://www.ga4gh.org/>`_ (2015-2022). 
+
+- `Jacobsen JOB, et al. (2022) The GA4GH Phenopacket schema defines a computable representation of clinical data. Nat Biotechnol <https://pubmed.ncbi.nlm.nih.gov/35705716/>`_ 
+- `Ladewig MS, et al. (2022) GA4GH Phenopackets: A Practical Introduction. Adv Genet (Hoboken) <https://pubmed.ncbi.nlm.nih.gov/36910590/>`_

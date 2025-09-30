@@ -127,7 +127,7 @@ medical data. The following table shows some typical examples.
 
 Genotypes
 #########
-GENO is anontology of genotypes their more fundamental sequence components, and links to related biological
+GENO is an ontology of genotypes their more fundamental sequence components, and links to related biological
 and experimental entities. We use GENO terms to denote genotypes.
 
 

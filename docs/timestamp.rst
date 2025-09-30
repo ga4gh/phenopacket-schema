@@ -6,7 +6,7 @@ Timestamp
 
 In phenopackets we define the `Timestamp` as an `ISO-8601 date time <https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations>`_ string.
 
-The following documentation paraphrases the description of how this is represented in protobuf as JSON `Timestamp <https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Timestamp>`_
+The following documentation paraphrases the description of how a Timestamp is represented in protobuf as JSON (See `Timestamp <https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Timestamp>`_).
 
 The format for this is "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always expressed using
 four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds,

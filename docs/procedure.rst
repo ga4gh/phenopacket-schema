@@ -7,6 +7,7 @@ Procedure
 The Procedure element represents a clinical procedure performed on a subject. For example a surgical or diagnostic
 procedure such as a biopsy.
 
+
 By preference a single ``code`` to indicate both the procedure and the
 body site should be used. In cases where this is not possible, the body site should be indicated using a separate
 ontology class.
