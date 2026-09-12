@@ -103,7 +103,7 @@ the simultaneous surgical resection of the urinary bladder and prostate gland wi
         label: "Primary Malignant Neoplasm"
       procedure:
         code:
-          id: "NCIT:C5189"
+          id: "NCIT:C51899"
           label: "Radical Cystoprostatectomy"
       files:
       - uri: "file:///data/genomes/urothelial_ca_wgs.vcf.gz"
