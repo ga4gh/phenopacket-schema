@@ -325,7 +325,7 @@ public class YamlGenerationTest extends TestBase {
         TimeElement timeElement = TimeElement.newBuilder().setAge(age).build();
         OntologyClass histologicalDiagnosis = ontologyClass("NCIT:C39853", "Infiltrating Urothelial Carcinoma");
         OntologyClass tumorProgression = ontologyClass("NCIT:C84509", "Primary Malignant Neoplasm");
-        Procedure procedure = Procedure.newBuilder().setCode(ontologyClass("NCIT:C5189", "Radical Cystoprostatectomy")).build();
+        Procedure procedure = Procedure.newBuilder().setCode(ontologyClass("NCIT:C51899", "Radical Cystoprostatectomy")).build();
         String uri = "file:///data/genomes/urothelial_ca_wgs.vcf.gz";
         String htsDescription = "Urothelial carcinoma sample";
         String genomeAssembly = "GRCh38";
@@ -351,7 +351,7 @@ public class YamlGenerationTest extends TestBase {
                 procedure,
                 vcfFile);
         String hash = printAndGetHash(biosample, "biosample");
-        assertEquals("963cd06917f43146cf01455c5a7165dbf9401fb4c52c57456ed86c9fb411dc15", hash);
+        assertEquals("853e9949f0c729488f87298998b25d4bf4e280f7ce10b271d784013396ba58b6", hash);
     }
 
     @Test
