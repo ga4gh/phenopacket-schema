@@ -10,6 +10,15 @@ some **observed** deviation from normal morphology, physiology, or behavior. In 
 i.e., an inference or hypothesis about the  cause underlying the observed phenotypic abnormalities. Occasionally,
 physicians use the word phenotype to refer to a disease, but we do not use this meaning here.
 
+When to use
+###########
+
+Use the :ref:`Phenopacket <rstphenopacket>`'s ``diseases`` list to record diagnosed or suspected conditions, such
+as primary diagnoses, comorbidities or past medical history, with clinical details such as onset, stage and primary
+site. To record the result of a genomic analysis, such as a molecular diagnosis and the variants that support it,
+use an :ref:`rstinterpretation`. A disease diagnosed by an Interpretation may also be recorded in ``diseases``,
+with its clinical details.
+
 
 
 Data model
