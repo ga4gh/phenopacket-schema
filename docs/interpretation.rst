@@ -100,9 +100,14 @@ be specified.
 Diagnosis
 ~~~~~~~~~
 
-The diagnosis element is meant to refer to the disease that is inferred to be present in the individual
+The diagnosis element is meant to refer to the disease that the analysis represented in this Interpretation infers or
+confirms to be present in the individual
 or family being analyzed. The diagnosis can be made by  means of an analysis of the phenotypic or the genomic findings or both.
-The element is optional because if the **resolution_status** is **UNSOLVED** then there is no diagnosis.
+Unlike the :ref:`Phenopacket <rstphenopacket>`'s ``diseases`` list, which describes a condition's clinical details,
+the diagnosis directly binds the disease to the ``genomic_interpretations`` that support it, such as pathogenic
+variants or candidate genes. The status of the analysis, for example ``SOLVED`` or ``UNSOLVED``, is recorded in the
+Interpretation's ``progress_status``.
+The element is optional because if the **progress_status** is **UNSOLVED** then there is no diagnosis.
 
 **Data elements**
 
