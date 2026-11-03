@@ -36,6 +36,13 @@ Data model
    primary_site, :ref:`rstontologyclass`, 0..1, the primary site of disease
    laterality, :ref:`rstontologyclass`, 0..1, laterality (left or right) of the primary site of sites if applicable
 
+.. note::
+
+  **Diseases vs. interpretations.** The ``diseases`` list captures clinical context, including ``onset``,
+  ``disease_stage`` and ``primary_site``. A molecular diagnosis supported by genomic variants should be
+  captured in the diagnosis of an :ref:`rstinterpretation` (``interpretations[].diagnosis``). See
+  :ref:`rstdiseaseandinterpretation` for an example that uses both.
+
 
 
 
