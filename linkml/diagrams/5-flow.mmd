@@ -1,0 +1,24 @@
+flowchart LR
+    proto["<b>v2 .proto files</b><br/>src/main/proto"]
+    draft["<b>Draft LinkML</b><br/>imported/<br/>what v2 literally says"]
+    tools["<b>phenopacket-tools JSON Schema</b><br/>required fields, patterns"]
+    rtd["<b>Read the Docs tables</b><br/>recommended fields"]
+    curated["<b>Curated LinkML</b><br/>schema/, generated<br/>each change cites its source"]
+    decisions["<b>Recorded decisions</b><br/>rulings, readings, open questions"]
+    subgraph out["Generated from the curated LinkML"]
+        direction TB
+        gproto[".proto, v2-compatible"]
+        json["JSON Schema"]
+        py["Python classes"]
+        docs["Reference docs"]
+    end
+    checks{{"<b>Evaluation layers</b><br/>coverage, every change explained,<br/>.proto matches v2,<br/>real files round-trip,<br/>four sources compared"}}
+    proto -- importer --> draft
+    draft -- curation code --> curated
+    tools -- evidence rules --> curated
+    rtd -- evidence rules --> curated
+    decisions --> curated
+    curated -- generators --> out
+    gproto -. compared with .-> checks
+    proto -. compared with .-> checks
+    curated -. compared with .-> checks

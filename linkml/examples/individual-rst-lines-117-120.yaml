@@ -1,0 +1,4 @@
+individual:
+  id: "patient23456"
+  dateOfBirth: "1998-01-01T00:00:00Z"
+  sex: "MALE"

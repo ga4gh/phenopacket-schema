@@ -1,0 +1,7 @@
+htsFile:
+    uri: "file://data/genomes/germline_wgs.vcf.gz"
+    description: "Matched normal germline sample"
+    htsFormat: "VCF"
+    genomeAssembly: "GRCh38"
+    individualToSampleIdentifiers:
+        patient23456: "NA12345"
