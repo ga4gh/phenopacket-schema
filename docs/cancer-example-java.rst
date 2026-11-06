@@ -85,13 +85,13 @@ using a function similar to the following code, which represents the bladder car
         // left wall of urinary bladder
         OntologyClass sampleType = ontologyClass("UBERON_0001256", "wall of urinary bladder");
         Biosample.Builder biosampleBuilder = biosampleBuilder(patientId, sampleId, this.ageAtBiopsy, sampleType);
-        // also want to mention the procedure, Prostatocystectomy (NCIT:C94464)
+        // also want to mention the procedure, Radical Cystoprostatectomy (NCIT:C51899)
         //Infiltrating Urothelial Carcinoma (Code C39853)
         biosampleBuilder.setHistologicalDiagnosis(ontologyClass("NCIT:C39853", "Infiltrating Urothelial Carcinoma"));
         // A malignant tumor at the original site of growth
         biosampleBuilder.setTumorProgression(ontologyClass("NCIT:C84509", "Primary Malignant Neoplasm"));
         biosampleBuilder.addHtsFiles(createSomaticHtsFile());
-        biosampleBuilder.setProcedure(Procedure.newBuilder().setCode(ontologyClass("NCIT:C5189", "Radical Cystoprostatectomy")).build());
+        biosampleBuilder.setProcedure(Procedure.newBuilder().setCode(ontologyClass("NCIT:C51899", "Radical Cystoprostatectomy")).build());
         return biosampleBuilder.build();
     }
 

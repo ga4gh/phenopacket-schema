@@ -137,7 +137,7 @@ into the  wall of the bladder.
         label: "Grade 2 Lesion"
     procedure:
         code:
-            id: "NCIT:C5189"
+            id: "NCIT:C51899"
             label: "Radical Cystoprostatectomy"
     files:
         - uri: "file:///data/genomes/urothelial_ca_wgs.vcf.gz"
