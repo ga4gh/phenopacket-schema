@@ -10,6 +10,15 @@ some **observed** deviation from normal morphology, physiology, or behavior. In 
 i.e., an inference or hypothesis about the  cause underlying the observed phenotypic abnormalities. Occasionally,
 physicians use the word phenotype to refer to a disease, but we do not use this meaning here.
 
+When to use
+###########
+
+Use the :ref:`Phenopacket <rstphenopacket>`'s ``diseases`` list to record diagnosed or suspected conditions, such
+as primary diagnoses, comorbidities or past medical history, with clinical details such as onset, stage and primary
+site. To record the result of a genomic analysis, such as a molecular diagnosis and the variants that support it,
+use an :ref:`rstinterpretation`. A disease diagnosed by an Interpretation may also be recorded in ``diseases``,
+with its clinical details.
+
 
 
 Data model
@@ -26,6 +35,13 @@ Data model
    clinical_tnm_finding, :ref:`rstontologyclass` (List), 0..*, List of terms representing the tumor TNM score
    primary_site, :ref:`rstontologyclass`, 0..1, the primary site of disease
    laterality, :ref:`rstontologyclass`, 0..1, laterality (left or right) of the primary site of sites if applicable
+
+.. note::
+
+  **Diseases vs. interpretations.** The ``diseases`` list captures clinical context, including ``onset``,
+  ``disease_stage`` and ``primary_site``. A molecular diagnosis supported by genomic variants should be
+  captured in the diagnosis of an :ref:`rstinterpretation` (``interpretations[].diagnosis``). See
+  :ref:`rstdiseaseandinterpretation` for an example that uses both.
 
 
 

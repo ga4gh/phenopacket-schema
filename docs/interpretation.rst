@@ -100,9 +100,14 @@ be specified.
 Diagnosis
 ~~~~~~~~~
 
-The diagnosis element is meant to refer to the disease that is inferred to be present in the individual
+The diagnosis element is meant to refer to the disease that the analysis represented in this Interpretation infers or
+confirms to be present in the individual
 or family being analyzed. The diagnosis can be made by  means of an analysis of the phenotypic or the genomic findings or both.
-The element is optional because if the **resolution_status** is **UNSOLVED** then there is no diagnosis.
+Unlike the :ref:`Phenopacket <rstphenopacket>`'s ``diseases`` list, which describes a condition's clinical details,
+the diagnosis directly binds the disease to the ``genomic_interpretations`` that support it, such as pathogenic
+variants or candidate genes. The status of the analysis, for example ``SOLVED`` or ``UNSOLVED``, is recorded in the
+Interpretation's ``progress_status``.
+The element is optional because if the **progress_status** is **UNSOLVED** then there is no diagnosis.
 
 **Data elements**
 
@@ -265,3 +270,93 @@ this example, a *BRAF* variant is interpreted as being actionable in this sense.
 The ``subjectOrBiosampleId`` is set to the id of the :ref:`rstbiosample`
 that is contained in the enclosing phenopacket, representing a biopsy from
 a melanoma sample taken from the subject of the phenopacket.
+
+.. _rstdiseaseandinterpretation:
+
+Disease and interpretation in one phenopacket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A phenopacket can record the same disease in its ``diseases`` list and in an interpretation. In this example,
+``diseases`` records the clinical presentation of a cutaneous melanoma, with its stage, TNM findings and primary site
+(see :ref:`rstdisease`), and ``interpretations`` records the molecular diagnosis that links the melanoma to an
+actionable *BRAF* variant found in a biopsy of the tumor.
+
+.. code-block:: yaml
+
+    id: "example-melanoma"
+    subject:
+      id: "patient-1"
+    biosamples:
+      - id: "biopsy-1"
+        individualId: "patient-1"
+        sampledTissue:
+          id: "UBERON:0001068"
+          label: "skin of back"
+    diseases:
+      - term:
+          id: "NCIT:C3510"
+          label: "Cutaneous Melanoma"
+        diseaseStage:
+          - id: "NCIT:C27970"
+            label: "Stage III"
+        clinicalTnmFinding:
+          - id: "NCIT:C136912"
+            label: "Cutaneous Melanoma cN1 TNM Finding v8"
+          - id: "NCIT:C136895"
+            label: "Cutaneous Melanoma cM0 TNM Finding v8"
+        primarySite:
+          id: "UBERON:0001068"
+          label: "skin of back"
+    interpretations:
+      - id: "interpretation-1"
+        progressStatus: "COMPLETED"
+        diagnosis:
+          disease:
+            id: "NCIT:C3510"
+            label: "Cutaneous Melanoma"
+          genomicInterpretations:
+            - subjectOrBiosampleId: "biopsy-1"
+              interpretationStatus: "CONTRIBUTORY"
+              variantInterpretation:
+                acmgPathogenicityClassification: "PATHOGENIC"
+                therapeuticActionability: "ACTIONABLE"
+                variationDescriptor:
+                  id: "clinvar:13961"
+                  geneContext:
+                    valueId: "HGNC:1097"
+                    symbol: "BRAF"
+                  expressions:
+                    - syntax: "hgvs"
+                      value: "NM_001374258.1(BRAF):c.1919T>A (p.Val640Glu)"
+                  allelicState:
+                    id: "GENO:0000135"
+                    label: "heterozygous"
+    metaData:
+      created: "2021-05-14T10:35:00Z"
+      createdBy: "Example author"
+      resources:
+        - id: "ncit"
+          name: "NCI Thesaurus OBO Edition"
+          url: "http://purl.obolibrary.org/obo/ncit.owl"
+          version: "26.02d"
+          namespacePrefix: "NCIT"
+          iriPrefix: "http://purl.obolibrary.org/obo/NCIT_"
+        - id: "uberon"
+          name: "uber anatomy ontology"
+          url: "http://purl.obolibrary.org/obo/uberon.owl"
+          version: "2026-10-01"
+          namespacePrefix: "UBERON"
+          iriPrefix: "http://purl.obolibrary.org/obo/UBERON_"
+        - id: "geno"
+          name: "Genotype Ontology"
+          url: "http://purl.obolibrary.org/obo/geno.owl"
+          version: "2026-02-02"
+          namespacePrefix: "GENO"
+          iriPrefix: "http://purl.obolibrary.org/obo/GENO_"
+        - id: "hgnc"
+          name: "HUGO Gene Nomenclature Committee"
+          url: "https://www.genenames.org"
+          version: "2019-08-08"
+          namespacePrefix: "HGNC"
+          iriPrefix: "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/"
+      phenopacketSchemaVersion: "2.0"
