@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package org.phenopackets.schema.v2;
+
+import "phenopackets/schema/v2/core/base.proto";
+import "phenopackets/schema/v2/core/individual.proto";
+import "phenopackets/schema/v2/core/meta_data.proto";
+
+option java_multiple_files = true;
+option java_package = "org.phenopackets.schema.v2";
+
+// An anonymous phenotypic description of an individual or biosample with potential genes of interest and/or diagnoses.
+// This is a bundle of high-level concepts with no specifically defined relational concepts. It is expected that the
+// resources sharing the phenopackets will define and enforce their own semantics and level of requirements for included
+// fields.
+message Phenopacket {
+
+  // An identifier specific for this phenopacket.
+  string id = 1;
+
+  // The individual representing the focus of this packet - e.g. the proband in rare disease cases or cancer patient
+  org.phenopackets.schema.v2.core.Individual subject = 2;
+
+  // Structured definitions of the resources and ontologies used within the phenopacket. REQUIRED
+  org.phenopackets.schema.v2.core.MetaData meta_data = 11;
+}

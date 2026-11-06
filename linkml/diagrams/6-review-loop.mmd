@@ -1,0 +1,16 @@
+flowchart TB
+    found["<b>Differences found</b><br/>by curation and the checks:<br/>where v2, the validator and the docs<br/>disagree, or a comment is unclear"]
+    listed["<b>Differences listed</b><br/>by module and field,<br/>with a link to each source"]
+    issues["<b>GitHub issues</b><br/>created by AM with MMT"]
+    decide(("<b>Decisions</b><br/>by maintainers on<br/>contradictory or<br/>unclear points"))
+    example["<i>For example:</i><br/>MMT plans the issue,<br/>AM opens a PR,<br/>and people decide in its review"]
+    am["<b>AM</b><br/>records each decision"]
+    linkml["<b>Curation code</b><br/>applies the decision;<br/>curated LinkML regenerated"]
+    out["<b>Regenerated outputs</b><br/>JSON Schema, .proto, reference docs"]
+    v2docs["<b>Current v2 docs</b> (docs/*.rst)<br/>updated to match"]
+    found --> listed --> issues --> decide
+    decide -.- example
+    decide -- decision --> am
+    am --> linkml --> out
+    am --> v2docs
+    out -. new disagreements .-> found

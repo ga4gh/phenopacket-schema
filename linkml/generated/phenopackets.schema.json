@@ -1,0 +1,646 @@
+{
+  "$defs": {
+    "Age": {
+      "additionalProperties": false,
+      "description": "See http://build.fhir.org/datatypes and http://build.fhir.org/condition-definitions.html#Condition.onset_x_\nIn FHIR this is represented as a UCUM measurement - http://unitsofmeasure.org/trac/",
+      "properties": {
+        "iso8601duration": {
+          "description": "The :ref:`ISO 8601<metadata_date_time>` age of this object as ISO8601\nduration or time intervals. e.g. P40Y10M05D)",
+          "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d+[HMS])(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "iso8601duration"
+      ],
+      "title": "Age",
+      "type": "object"
+    },
+    "AgeRange": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "end": {
+          "$ref": "#/$defs/Age"
+        },
+        "start": {
+          "$ref": "#/$defs/Age"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "AgeRange",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "description": "FHIR mapping: Condition.evidence (https://www.hl7.org/fhir/condition-definitions.html#Condition.evidence)",
+      "properties": {
+        "evidenceCode": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "The encoded evidence type using, for example the Evidence & Conclusion Ontology (ECO - http://purl.obolibrary.org/obo/eco.owl)\nFHIR mapping: Condition.evidence.code"
+        },
+        "reference": {
+          "$ref": "#/$defs/ExternalReference",
+          "description": "FHIR mapping: Condition.evidence.detail"
+        }
+      },
+      "required": [
+        "evidenceCode"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "ExternalReference": {
+      "additionalProperties": false,
+      "description": "FHIR mapping: Reference (https://www.hl7.org/fhir/references.html)",
+      "properties": {
+        "description": {
+          "description": "Human readable title or display string for the reference\nFHIR mapping: Reference.display",
+          "type": "string"
+        },
+        "id": {
+          "description": "e.g. ISBN, PMID:123456, DOI:...,\nFHIR mapping: Reference.identifier",
+          "type": "string"
+        },
+        "reference": {
+          "description": "A full or partial URL pointing to the external reference if no commonly resolvable identifier can be used in the\n`id` field\nFHIR mapping Reference.reference",
+          "type": "string"
+        }
+      },
+      "title": "ExternalReference",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "fileAttributes": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileFileAttributesEntry__identifier_optional"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": "Map of attributes describing the file. For example the File format or genome assembly would be defied here. For\ngenomic data files there MUST be a 'genomeAssembly' key.",
+          "type": "object"
+        },
+        "individualToFileIdentifiers": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileIndividualToFileIdentifiersEntry__identifier_optional"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": "A map of identifiers mapping an individual to a sample in the file. The key values must correspond to the\nIndividual::id for the individuals in the message, the values must map to the samples in the file.",
+          "type": "object"
+        },
+        "uri": {
+          "description": "URI for the file e.g. file://data/genomes/file1.vcf.gz or https://opensnp.org/data/60.23andme-exome-vcf.231?1341012444",
+          "pattern": ".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "FileFileAttributesEntry": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "FileFileAttributesEntry",
+      "type": "object"
+    },
+    "FileFileAttributesEntry__identifier_optional": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "FileFileAttributesEntry",
+      "type": "object"
+    },
+    "FileIndividualToFileIdentifiersEntry": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "FileIndividualToFileIdentifiersEntry",
+      "type": "object"
+    },
+    "FileIndividualToFileIdentifiersEntry__identifier_optional": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "FileIndividualToFileIdentifiersEntry",
+      "type": "object"
+    },
+    "GestationalAge": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "days": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "weeks": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "weeks"
+      ],
+      "title": "GestationalAge",
+      "type": "object"
+    },
+    "Individual": {
+      "additionalProperties": false,
+      "description": "An individual (or subject) typically corresponds to an individual human or another organism.\nFHIR mapping: Patient (https://www.hl7.org/fhir/patient.html).",
+      "properties": {
+        "alternateIds": {
+          "description": "An optional list of alternative identifiers for this individual. This field is provided\nfor the convenience of users who may have multiple mappings to an individual which they need to track.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "dateOfBirth": {
+          "description": "The date of birth of the individual as an ISO8601 UTC timestamp - rounded down to the closest known\nyear/month/day/hour/minute\ne.g. \"2018-03-01T00:00:00Z\" for someone born on an unknown day in March 2018\nor \"2018-01-01T00:00:00Z\" for someone born on an unknown day in 2018\nor empty if unknown/ not stated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "Self-identified gender"
+        },
+        "id": {
+          "description": "An identifier for the individual. This must be unique within the record.\nARGO mapping donor::submitter_donor_id",
+          "pattern": ".",
+          "type": "string"
+        },
+        "karyotypicSex": {
+          "$ref": "#/$defs/KaryotypicSex",
+          "description": "The karyotypic sex of the individual"
+        },
+        "sex": {
+          "$ref": "#/$defs/Sex",
+          "description": "The phenotypic sex of the individual\nARGO mapping sample_registration::gender (this is complicated as ARGO only have male/female/other which maps to the phenopacket Sex field)"
+        },
+        "taxonomy": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "NCBI taxonomic identifier NCBITaxon e.g. NCBITaxon:9606 or NCBITaxon:1337\nFor resources where there may be more than one organism being studied it is advisable to indicate the taxonomic\nidentifier of that organism, to its most specific level"
+        },
+        "timeAtLastEncounter": {
+          "$ref": "#/$defs/TimeElement",
+          "description": "An TimeElement object describing the age of the individual at the last time of collection. The Age object allows the encoding\nof the age either as ISO8601 duration or time interval (preferred), or as ontology term object.\nSee http://build.fhir.org/datatypes"
+        },
+        "vitalStatus": {
+          "$ref": "#/$defs/VitalStatus",
+          "description": "Vital status of the individual. If not present it is assumed that the individual is alive. If present it will\ndefault to 'false' i.e. the individual was alive when the data was collected.\nARGO mapping donor::vital_status"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "Individual",
+      "type": "object"
+    },
+    "KaryotypicSex": {
+      "description": "Karyotypic sex of the individual",
+      "enum": [
+        "UNKNOWN_KARYOTYPE",
+        "XX",
+        "XY",
+        "XO",
+        "XXY",
+        "XXX",
+        "XXYY",
+        "XXXY",
+        "XXXX",
+        "XYY",
+        "OTHER_KARYOTYPE"
+      ],
+      "title": "KaryotypicSex",
+      "type": "string"
+    },
+    "MetaData": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "created": {
+          "description": "ISO8601 UTC timestamp for when this phenopacket was created in ISO \"2018-03-01T00:00:00Z\"",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "some kind of identifier for the contributor/ program\nARGO sample_registration::program_id",
+          "pattern": ".",
+          "type": "string"
+        },
+        "externalReferences": {
+          "description": "External identifiers for this message. These are considered different representation of the same record, not\nrecords which are in some other relation with the record at hand. For example this might be a PubMed reference\nto a study in which the individuals are reported.",
+          "items": {
+            "$ref": "#/$defs/ExternalReference"
+          },
+          "type": "array"
+        },
+        "phenopacketSchemaVersion": {
+          "description": "phenopacket-schema-version used to create this phenopacket",
+          "pattern": ".",
+          "type": "string"
+        },
+        "resources": {
+          "description": "a listing of the ontologies and resources referenced in the phenopacket",
+          "items": {
+            "$ref": "#/$defs/Resource"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "submittedBy": {
+          "description": "information about the person/organisation/network that has submitted this phenopacket",
+          "type": "string"
+        },
+        "updates": {
+          "description": "An OPTIONAL list of Updates to the phenopacket.",
+          "items": {
+            "$ref": "#/$defs/Update"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "created",
+        "createdBy",
+        "phenopacketSchemaVersion"
+      ],
+      "title": "MetaData",
+      "type": "object"
+    },
+    "OntologyClass": {
+      "additionalProperties": false,
+      "description": "A class (aka term, concept) in an ontology.\nFHIR mapping: CodeableConcept (http://www.hl7.org/fhir/datatypes.html#CodeableConcept)\nsee also Coding (http://www.hl7.org/fhir/datatypes.html#Coding)",
+      "properties": {
+        "id": {
+          "description": "a CURIE-style identifier e.g. HP:0100024, MP:0001284, UBERON:0001690.\nThis is the primary key for the ontology class\nREQUIRED!",
+          "pattern": ".",
+          "type": "string"
+        },
+        "label": {
+          "description": "class label, aka name. E.g. \"Abnormality of cardiovascular system\"",
+          "pattern": ".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "OntologyClass",
+      "type": "object"
+    },
+    "Phenopacket": {
+      "additionalProperties": false,
+      "description": "An anonymous phenotypic description of an individual or biosample with potential genes of interest and/or diagnoses.\nThis is a bundle of high-level concepts with no specifically defined relational concepts. It is expected that the\nresources sharing the phenopackets will define and enforce their own semantics and level of requirements for included\nfields.",
+      "properties": {
+        "id": {
+          "description": "An identifier specific for this phenopacket.",
+          "pattern": ".",
+          "type": "string"
+        },
+        "metaData": {
+          "$ref": "#/$defs/MetaData",
+          "description": "Structured definitions of the resources and ontologies used within the phenopacket. REQUIRED"
+        },
+        "subject": {
+          "$ref": "#/$defs/Individual",
+          "description": "The individual representing the focus of this packet - e.g. the proband in rare disease cases or cancer patient"
+        }
+      },
+      "required": [
+        "id",
+        "metaData"
+      ],
+      "title": "Phenopacket",
+      "type": "object"
+    },
+    "Procedure": {
+      "additionalProperties": false,
+      "description": "A clinical procedure performed on a subject. By preference a single concept to indicate both the procedure and the\nbody site should be used. In cases where this is not possible, the body site should be indicated using a separate\nontology class.\ne.g.\n{\"code\":{\"NCIT:C51585\": \"Biopsy of Soft Palate\"}}\n{\"code\":{\"NCIT:C28743\": \"Punch Biopsy\"}, \"body_site\":{\"UBERON:0003403\": \"skin of forearm\"}} - a punch biopsy of the skin from the forearm\nFHIR mapping: Procedure (https://www.hl7.org/fhir/procedure.html)",
+      "properties": {
+        "bodySite": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "FHIR mapping: Procedure.bodySite"
+        },
+        "code": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "FHIR mapping: Procedure.code"
+        },
+        "performed": {
+          "$ref": "#/$defs/TimeElement",
+          "description": "When the procedure was performed."
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "Procedure",
+      "type": "object"
+    },
+    "Resource": {
+      "additionalProperties": false,
+      "description": "Description of an external resource used for referencing an object. For example the resource may be an ontology such\nas the HPO or SNOMED.\nFHIR mapping: CodeSystem (http://www.hl7.org/fhir/codesystem.html)",
+      "properties": {
+        "id": {
+          "description": "for OBO Ontologies, the value of this string MUST always be the official\nOBO ID, which is always equivalent to the ID prefix in lower case.\nExamples: hp, go, mp, mondo\nConsult http://obofoundry.org for a complete list\nFor other ontologies (e.g. SNOMED), use the prefix in identifiers.org",
+          "pattern": ".",
+          "type": "string"
+        },
+        "iriPrefix": {
+          "description": "Full IRI prefix which can be used with the namespace_prefix and the OntologyClass::id to resolve to an IRI for a\nterm. Tools such as the curie-util (https://github.com/prefixcommons/curie-util) can utilise this to produce\nfully-resolvable IRIs for an OntologyClass.\ne.g. Using the HPO term encoding the concept of 'Severe'\nOntologyClass:\nid: 'HP:0012828'\nlabel: 'Severe'\nResource:\nnamespace_prefix: 'HP'\niri_prefix: 'http://purl.obolibrary.org/obo/HP_'\nthe term can be resolved to http://purl.obolibrary.org/obo/HP_0012828",
+          "pattern": ".",
+          "type": "string"
+        },
+        "name": {
+          "description": "e.g. The Human Phenotype Ontology\nfor OBO Ontologies, the value of this string SHOULD be the same as the title\nfield on http://obofoundry.org\nhowever, this field is purely for information purposes and software\nshould not encode any assumptions",
+          "pattern": ".",
+          "type": "string"
+        },
+        "namespacePrefix": {
+          "description": "The prefix used in the CURIE of an OntologyClass e.g. HP, MP, ECO\nFor example an HPO term will have a CURIE like this - HP:0012828 which should be used in combination with\nthe iri_prefix to form a fully-resolvable IRI",
+          "pattern": ".",
+          "type": "string"
+        },
+        "url": {
+          "description": "For OBO ontologies, this should always be the PURL, e.g.\nhttp://purl.obolibrary.org/obo/hp.owl, http://purl.obolibrary.org/obo/hp.obo",
+          "pattern": ".",
+          "type": "string"
+        },
+        "version": {
+          "description": "for OBO ontologies, this should be the versionIRI",
+          "pattern": ".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "url",
+        "version",
+        "namespacePrefix",
+        "iriPrefix"
+      ],
+      "title": "Resource",
+      "type": "object"
+    },
+    "Sex": {
+      "description": "Sex of an individual\nFHIR mapping: AdministrativeGender (https://www.hl7.org/fhir/codesystem-administrative-gender.html)",
+      "enum": [
+        "UNKNOWN_SEX",
+        "FEMALE",
+        "MALE",
+        "OTHER_SEX"
+      ],
+      "title": "Sex",
+      "type": "string"
+    },
+    "TimeElement": {
+      "additionalProperties": false,
+      "description": "",
+      "oneOf": [
+        {
+          "properties": {
+            "gestationalAge": {}
+          },
+          "required": [
+            "gestationalAge"
+          ]
+        },
+        {
+          "properties": {
+            "age": {}
+          },
+          "required": [
+            "age"
+          ]
+        },
+        {
+          "properties": {
+            "ageRange": {}
+          },
+          "required": [
+            "ageRange"
+          ]
+        },
+        {
+          "properties": {
+            "ontologyClass": {}
+          },
+          "required": [
+            "ontologyClass"
+          ]
+        },
+        {
+          "properties": {
+            "timestamp": {}
+          },
+          "required": [
+            "timestamp"
+          ]
+        },
+        {
+          "properties": {
+            "interval": {}
+          },
+          "required": [
+            "interval"
+          ]
+        }
+      ],
+      "properties": {
+        "age": {
+          "$ref": "#/$defs/Age"
+        },
+        "ageRange": {
+          "$ref": "#/$defs/AgeRange"
+        },
+        "gestationalAge": {
+          "$ref": "#/$defs/GestationalAge"
+        },
+        "interval": {
+          "$ref": "#/$defs/TimeInterval"
+        },
+        "ontologyClass": {
+          "$ref": "#/$defs/OntologyClass"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "TimeElement",
+      "type": "object"
+    },
+    "TimeInterval": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "end": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "start": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "TimeInterval",
+      "type": "object"
+    },
+    "Update": {
+      "additionalProperties": false,
+      "description": "Information about when an update to a record occurred, who or what made the update and any pertinent information\nregarding the content and/or reason for the update",
+      "properties": {
+        "comment": {
+          "description": "Textual comment about the changes made to the content and/or reason for the update.\nOPTIONAL",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "ISO8601 UTC timestamps at which this record was updated, in\nthe format YYYY-MM-DDTHH:MM:SS.SSSZ e.g. 2007-12-03T10:15:30.00Z\nREQUIRED",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "description": "Information about the person/organisation/network that has updated the phenopacket.\nOPTIONAL",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp"
+      ],
+      "title": "Update",
+      "type": "object"
+    },
+    "VitalStatus": {
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "causeOfDeath": {
+          "$ref": "#/$defs/OntologyClass",
+          "description": "ARGO mapping donor::cause_of_death"
+        },
+        "status": {
+          "$ref": "#/$defs/VitalStatusStatus"
+        },
+        "survivalTimeInDays": {
+          "description": "ARGO mapping donor::survival_time",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "timeOfDeath": {
+          "$ref": "#/$defs/TimeElement"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "VitalStatus",
+      "type": "object"
+    },
+    "VitalStatusStatus": {
+      "description": "Default = false i.e. the individual is alive. MUST be true if",
+      "enum": [
+        "UNKNOWN_STATUS",
+        "ALIVE",
+        "DECEASED"
+      ],
+      "title": "VitalStatusStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://example.org/phenopacket-linkml/phenopackets",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "additionalProperties": false,
+  "description": "An anonymous phenotypic description of an individual or biosample with potential genes of interest and/or diagnoses.\nThis is a bundle of high-level concepts with no specifically defined relational concepts. It is expected that the\nresources sharing the phenopackets will define and enforce their own semantics and level of requirements for included\nfields.",
+  "metamodel_version": "1.12.0",
+  "properties": {
+    "id": {
+      "description": "An identifier specific for this phenopacket.",
+      "pattern": ".",
+      "type": "string"
+    },
+    "metaData": {
+      "$ref": "#/$defs/MetaData",
+      "description": "Structured definitions of the resources and ontologies used within the phenopacket. REQUIRED"
+    },
+    "subject": {
+      "$ref": "#/$defs/Individual",
+      "description": "The individual representing the focus of this packet - e.g. the proband in rare disease cases or cancer patient"
+    }
+  },
+  "required": [
+    "id",
+    "metaData"
+  ],
+  "title": "phenopackets",
+  "type": "object",
+  "version": null
+}

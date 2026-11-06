@@ -1,0 +1,253 @@
+syntax = "proto3";
+package phenopackets;
+// metamodel_version: 1.12.0
+// See http://build.fhir.org/datatypes and http://build.fhir.org/condition-definitions.html#Condition.onset_x_
+// In FHIR this is represented as a UCUM measurement - http://unitsofmeasure.org/trac/
+message Age {
+  // The :ref:`ISO 8601<metadata_date_time>` age of this object as ISO8601
+  // duration or time intervals. e.g. P40Y10M05D)
+  string iso8601duration = 1;
+}
+message AgeRange {
+  Age start = 1;
+  Age end = 2;
+}
+// FHIR mapping: Condition.evidence (https://www.hl7.org/fhir/condition-definitions.html#Condition.evidence)
+message Evidence {
+  // The encoded evidence type using, for example the Evidence & Conclusion Ontology (ECO - http://purl.obolibrary.org/obo/eco.owl)
+  // FHIR mapping: Condition.evidence.code
+  OntologyClass evidenceCode = 1;
+  // FHIR mapping: Condition.evidence.detail
+  ExternalReference reference = 2;
+}
+// FHIR mapping: Reference (https://www.hl7.org/fhir/references.html)
+message ExternalReference {
+  // e.g. ISBN, PMID:123456, DOI:...,
+  // FHIR mapping: Reference.identifier
+  string id = 1;
+  // A full or partial URL pointing to the external reference if no commonly resolvable identifier can be used in the
+  // `id` field
+  // FHIR mapping Reference.reference
+  string reference = 2;
+  // Human readable title or display string for the reference
+  // FHIR mapping: Reference.display
+  string description = 3;
+}
+message File {
+  // URI for the file e.g. file://data/genomes/file1.vcf.gz or https://opensnp.org/data/60.23andme-exome-vcf.231?1341012444
+  string uri = 1;
+  // A map of identifiers mapping an individual to a sample in the file. The key values must correspond to the
+  // Individual::id for the individuals in the message, the values must map to the samples in the file.
+  repeated FileIndividualToFileIdentifiersEntry individualToFileIdentifiers = 2;
+  // Map of attributes describing the file. For example the File format or genome assembly would be defied here. For
+  // genomic data files there MUST be a 'genomeAssembly' key.
+  repeated FileFileAttributesEntry fileAttributes = 3;
+}
+message FileFileAttributesEntry {
+  string key = 1;
+  string value = 2;
+}
+message FileIndividualToFileIdentifiersEntry {
+  string key = 1;
+  string value = 2;
+}
+message GestationalAge {
+  int32 weeks = 1;
+  int32 days = 2;
+}
+// An individual (or subject) typically corresponds to an individual human or another organism.
+// FHIR mapping: Patient (https://www.hl7.org/fhir/patient.html).
+message Individual {
+  // An identifier for the individual. This must be unique within the record.
+  // ARGO mapping donor::submitter_donor_id
+  string id = 1;
+  // An optional list of alternative identifiers for this individual. This field is provided
+  // for the convenience of users who may have multiple mappings to an individual which they need to track.
+  repeated string alternateIds = 2;
+  // The date of birth of the individual as an ISO8601 UTC timestamp - rounded down to the closest known
+  // year/month/day/hour/minute
+  // e.g. "2018-03-01T00:00:00Z" for someone born on an unknown day in March 2018
+  // or "2018-01-01T00:00:00Z" for someone born on an unknown day in 2018
+  // or empty if unknown/ not stated.
+  string dateOfBirth = 3;
+  // An TimeElement object describing the age of the individual at the last time of collection. The Age object allows the encoding
+  // of the age either as ISO8601 duration or time interval (preferred), or as ontology term object.
+  // See http://build.fhir.org/datatypes
+  TimeElement timeAtLastEncounter = 4;
+  // Vital status of the individual. If not present it is assumed that the individual is alive. If present it will
+  // default to 'false' i.e. the individual was alive when the data was collected.
+  // ARGO mapping donor::vital_status
+  VitalStatus vitalStatus = 5;
+  // The phenotypic sex of the individual
+  // ARGO mapping sample_registration::gender (this is complicated as ARGO only have male/female/other which maps to the phenopacket Sex field)
+  Sex sex = 6;
+  // The karyotypic sex of the individual
+  KaryotypicSex karyotypicSex = 7;
+  // Self-identified gender
+  OntologyClass gender = 8;
+  // NCBI taxonomic identifier NCBITaxon e.g. NCBITaxon:9606 or NCBITaxon:1337
+  // For resources where there may be more than one organism being studied it is advisable to indicate the taxonomic
+  // identifier of that organism, to its most specific level
+  OntologyClass taxonomy = 9;
+}
+message MetaData {
+  // ISO8601 UTC timestamp for when this phenopacket was created in ISO "2018-03-01T00:00:00Z"
+  string created = 1;
+  // some kind of identifier for the contributor/ program
+  // ARGO sample_registration::program_id
+  string createdBy = 2;
+  // information about the person/organisation/network that has submitted this phenopacket
+  string submittedBy = 3;
+  // a listing of the ontologies and resources referenced in the phenopacket
+  repeated Resource resources = 4;
+  // An OPTIONAL list of Updates to the phenopacket.
+  repeated Update updates = 5;
+  // phenopacket-schema-version used to create this phenopacket
+  string phenopacketSchemaVersion = 6;
+  // External identifiers for this message. These are considered different representation of the same record, not
+  // records which are in some other relation with the record at hand. For example this might be a PubMed reference
+  // to a study in which the individuals are reported.
+  repeated ExternalReference externalReferences = 7;
+}
+// A class (aka term, concept) in an ontology.
+// FHIR mapping: CodeableConcept (http://www.hl7.org/fhir/datatypes.html#CodeableConcept)
+// see also Coding (http://www.hl7.org/fhir/datatypes.html#Coding)
+message OntologyClass {
+  // a CURIE-style identifier e.g. HP:0100024, MP:0001284, UBERON:0001690.
+  // This is the primary key for the ontology class
+  // REQUIRED!
+  string id = 1;
+  // class label, aka name. E.g. "Abnormality of cardiovascular system"
+  string label = 2;
+}
+// An anonymous phenotypic description of an individual or biosample with potential genes of interest and/or diagnoses.
+// This is a bundle of high-level concepts with no specifically defined relational concepts. It is expected that the
+// resources sharing the phenopackets will define and enforce their own semantics and level of requirements for included
+// fields.
+message Phenopacket {
+  // An identifier specific for this phenopacket.
+  string id = 1;
+  // The individual representing the focus of this packet - e.g. the proband in rare disease cases or cancer patient
+  Individual subject = 2;
+  // Structured definitions of the resources and ontologies used within the phenopacket. REQUIRED
+  MetaData metaData = 11;
+}
+// A clinical procedure performed on a subject. By preference a single concept to indicate both the procedure and the
+// body site should be used. In cases where this is not possible, the body site should be indicated using a separate
+// ontology class.
+// e.g.
+// {"code":{"NCIT:C51585": "Biopsy of Soft Palate"}}
+// {"code":{"NCIT:C28743": "Punch Biopsy"}, "body_site":{"UBERON:0003403": "skin of forearm"}} - a punch biopsy of the skin from the forearm
+// FHIR mapping: Procedure (https://www.hl7.org/fhir/procedure.html)
+message Procedure {
+  // FHIR mapping: Procedure.code
+  OntologyClass code = 1;
+  // FHIR mapping: Procedure.bodySite
+  OntologyClass bodySite = 2;
+  // When the procedure was performed.
+  TimeElement performed = 3;
+}
+// Description of an external resource used for referencing an object. For example the resource may be an ontology such
+// as the HPO or SNOMED.
+// FHIR mapping: CodeSystem (http://www.hl7.org/fhir/codesystem.html)
+message Resource {
+  // for OBO Ontologies, the value of this string MUST always be the official
+  // OBO ID, which is always equivalent to the ID prefix in lower case.
+  // Examples: hp, go, mp, mondo
+  // Consult http://obofoundry.org for a complete list
+  // For other ontologies (e.g. SNOMED), use the prefix in identifiers.org
+  string id = 1;
+  // e.g. The Human Phenotype Ontology
+  // for OBO Ontologies, the value of this string SHOULD be the same as the title
+  // field on http://obofoundry.org
+  // however, this field is purely for information purposes and software
+  // should not encode any assumptions
+  string name = 2;
+  // For OBO ontologies, this should always be the PURL, e.g.
+  // http://purl.obolibrary.org/obo/hp.owl, http://purl.obolibrary.org/obo/hp.obo
+  string url = 3;
+  // for OBO ontologies, this should be the versionIRI
+  string version = 4;
+  // The prefix used in the CURIE of an OntologyClass e.g. HP, MP, ECO
+  // For example an HPO term will have a CURIE like this - HP:0012828 which should be used in combination with
+  // the iri_prefix to form a fully-resolvable IRI
+  string namespacePrefix = 5;
+  // Full IRI prefix which can be used with the namespace_prefix and the OntologyClass::id to resolve to an IRI for a
+  // term. Tools such as the curie-util (https://github.com/prefixcommons/curie-util) can utilise this to produce
+  // fully-resolvable IRIs for an OntologyClass.
+  // e.g. Using the HPO term encoding the concept of 'Severe'
+  // OntologyClass:
+  // id: 'HP:0012828'
+  // label: 'Severe'
+  // Resource:
+  // namespace_prefix: 'HP'
+  // iri_prefix: 'http://purl.obolibrary.org/obo/HP_'
+  // the term can be resolved to http://purl.obolibrary.org/obo/HP_0012828
+  string iriPrefix = 6;
+}
+message TimeElement {
+  GestationalAge gestationalAge = 6;
+  Age age = 1;
+  AgeRange ageRange = 2;
+  OntologyClass ontologyClass = 3;
+  string timestamp = 4;
+  TimeInterval interval = 5;
+}
+message TimeInterval {
+  string start = 1;
+  string end = 2;
+}
+// Information about when an update to a record occurred, who or what made the update and any pertinent information
+// regarding the content and/or reason for the update
+message Update {
+  // ISO8601 UTC timestamps at which this record was updated, in
+  // the format YYYY-MM-DDTHH:MM:SS.SSSZ e.g. 2007-12-03T10:15:30.00Z
+  // REQUIRED
+  string timestamp = 1;
+  // Information about the person/organisation/network that has updated the phenopacket.
+  // OPTIONAL
+  string updatedBy = 2;
+  // Textual comment about the changes made to the content and/or reason for the update.
+  // OPTIONAL
+  string comment = 3;
+}
+message VitalStatus {
+  VitalStatusStatus status = 1;
+  TimeElement timeOfDeath = 2;
+  // ARGO mapping donor::cause_of_death
+  OntologyClass causeOfDeath = 3;
+  // ARGO mapping donor::survival_time
+  int32 survivalTimeInDays = 4;
+}
+
+// Karyotypic sex of the individual
+enum KaryotypicSex {
+  KARYOTYPIC_SEX_UNSPECIFIED = 0;
+  KARYOTYPIC_SEX_UNKNOWN_KARYOTYPE = 1;
+  KARYOTYPIC_SEX_XX = 2;
+  KARYOTYPIC_SEX_XY = 3;
+  KARYOTYPIC_SEX_XO = 4;
+  KARYOTYPIC_SEX_XXY = 5;
+  KARYOTYPIC_SEX_XXX = 6;
+  KARYOTYPIC_SEX_XXYY = 7;
+  KARYOTYPIC_SEX_XXXY = 8;
+  KARYOTYPIC_SEX_XXXX = 9;
+  KARYOTYPIC_SEX_XYY = 10;
+  KARYOTYPIC_SEX_OTHER_KARYOTYPE = 11;
+}
+// Sex of an individual
+// FHIR mapping: AdministrativeGender (https://www.hl7.org/fhir/codesystem-administrative-gender.html)
+enum Sex {
+  SEX_UNSPECIFIED = 0;
+  SEX_UNKNOWN_SEX = 1;
+  SEX_FEMALE = 2;
+  SEX_MALE = 3;
+  SEX_OTHER_SEX = 4;
+}
+// Default = false i.e. the individual is alive. MUST be true if
+enum VitalStatusStatus {
+  VITAL_STATUS_STATUS_UNSPECIFIED = 0;
+  VITAL_STATUS_STATUS_UNKNOWN_STATUS = 1;
+  VITAL_STATUS_STATUS_ALIVE = 2;
+  VITAL_STATUS_STATUS_DECEASED = 3;
+}
