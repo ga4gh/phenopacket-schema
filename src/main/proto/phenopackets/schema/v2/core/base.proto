@@ -71,7 +71,7 @@ message GestationalAge {
 // See http://build.fhir.org/datatypes and http://build.fhir.org/condition-definitions.html#Condition.onset_x_
 // In FHIR this is represented as a UCUM measurement - http://unitsofmeasure.org/trac/
 message Age {
-    // The :ref:`ISO 8601<metadata_date_time>` age of this object as ISO8601
+    // The ISO 8601 age of this object as ISO8601
     // duration or time intervals. e.g. P40Y10M05D)
     string iso8601duration = 1;
 }
