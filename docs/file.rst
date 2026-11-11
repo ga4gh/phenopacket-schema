@@ -74,6 +74,6 @@ the values must map to identifiers in the file.
 file_attributes
 ~~~~~~~~~~~~~~~
 A map of attributes which a resource might want to share about the contents of a file. For example a file containing
-genomic coordinates (e.g. VCF, BED) SHOULD contain an entry with the key `genomicAssembly` and a value indicating the
+genomic coordinates (e.g. VCF, BED) SHOULD contain an entry with the key `genomeAssembly` and a value indicating the
 genome assembly the contents of the file was called against. We recommend using the
 `Genome Reference Consortium <https://www.ncbi.nlm.nih.gov/grc>`_ nomenclature e.g. `GRCh37`, `GRCh38`.

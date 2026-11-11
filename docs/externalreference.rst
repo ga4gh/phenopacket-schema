@@ -29,7 +29,7 @@ Data model
     * - reference
       - string
       - 0..1
-      - An application specific identifier. RECOMMENDED.
+      - A full or partial URL pointing to the external reference if no commonly resolvable identifier can be used in the ``id`` field. RECOMMENDED.
     * - description
       - string
       - 0..1
