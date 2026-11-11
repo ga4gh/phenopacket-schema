@@ -62,7 +62,7 @@ Data model
    * - time_of_collection
      - :ref:`rsttimeelement`
      - 0..1
-     - Age of the proband at the time the sample was taken. RECOMMENDED.
+     - Age of the proband at the time the sample was taken, or the time of collection itself. RECOMMENDED.
    * - histological_diagnosis
      - :ref:`rstontologyclass`
      - 0..1

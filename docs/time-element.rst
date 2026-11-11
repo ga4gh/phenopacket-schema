@@ -5,11 +5,11 @@ TimeElement
 ############
 
 This element intends to bundle all of the various ways of denoting time or age in
-phenopackets schema. Starting with version 2, other elements will be required to
-use a TimeElement rather than any of the more specific elements. For instance, the
-version 1.0 of :ref:`rstphenotypicfeature` uses an :ref:`rstontologyclass` for the age of
-onset of the phenotypic feature. Version 2 will replace this with a `TimeElement`. This
-will mean that all references to time and age throughout the phenopacket standard
+phenopackets schema. Starting with version 2, other elements are required to
+use a TimeElement rather than any of the more specific elements. For instance,
+version 1.0 of :ref:`rstphenotypicfeature` used an :ref:`rstontologyclass` for the age of
+onset of the phenotypic feature. Version 2 replaced this with a `TimeElement`. This
+means that all references to time and age throughout the phenopacket standard
 are uniform. That this change was needed became obvious when trying to model an acute
 phenotypic abnormality such as an episode of fever occurring one day before admission
 to the hospital.

@@ -49,7 +49,7 @@ describe the phenotypic abnormalities directly associated with an extirpated or 
     * - diseases
       - List of :ref:`rstdisease`
       - 0..*
-      - Disease(s) diagnosed in the proband
+      - Disease(s) diagnosed or suspected in the proband
     * - medical_actions
       - List of :ref:`rstmedicalaction`
       - 0..*
